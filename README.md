@@ -15,6 +15,7 @@ A modern, full-stack customer management application consisting of a **Spring Bo
 - [Features](#features)
 - [Getting Started](#getting-started)
 - [Running the Project](#running-the-project)
+- [Screenshots](#screenshots)
 
 ---
 
@@ -285,6 +286,17 @@ mvn javafx:run
 
 ---
 
+## Screenshots
+
+### Backend
+![Backend Running](screenshots/backendEvidence.png)
+
+### Desktop Application
+![Customer List](screenshots/desktopAppEvidence.png)
+![Desktop App](screenshots/desktopEvidence.png)
+
+---
+
 ## Troubleshooting
 
 ### Backend Won't Start
@@ -316,7 +328,3 @@ To extend this project, consider:
 - Deploying backend to a cloud platform (AWS, Azure, Heroku)
 
 ---
-
-## License
-
-This project is provided as-is for educational and development purposes.
