@@ -26,7 +26,7 @@ public class Customer {
     @Column(nullable = false, length = 100, unique = true)
     private String email;
 
-    @Column(length = 50)
+    @Column(length = 50, unique = true)
     private String phone;
 
     @CreatedDate

@@ -37,6 +37,13 @@ public class CustomerServiceImpl implements CustomerService {
     @Override
     @Transactional
     public Customer createCustomer(CreateCustomerRequest createCustomerRequest) {
+        if (customerRepository.existsByEmail(createCustomerRequest.getEmail())) {
+            throw new IllegalStateException("Email already exists");
+        }
+
+        if (customerRepository.existsByPhone(createCustomerRequest.getPhone())) {
+            throw new IllegalStateException("Phone already exists");
+        }
         Customer newCustomer = new Customer();
         newCustomer.setEmail(createCustomerRequest.getEmail());
         newCustomer.setName(createCustomerRequest.getName());

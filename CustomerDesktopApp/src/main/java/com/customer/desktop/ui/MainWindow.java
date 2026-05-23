@@ -1,5 +1,7 @@
 package com.customer.desktop.ui;
 
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.List;
 
 import com.customer.desktop.model.Customer;
@@ -16,6 +18,7 @@ import javafx.scene.control.Button;
 import javafx.scene.control.ButtonType;
 import javafx.scene.control.Label;
 import javafx.scene.control.ProgressIndicator;
+import javafx.scene.control.TableCell;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
@@ -135,6 +138,23 @@ public class MainWindow {
 
         TableColumn<Customer, String> createdCol = new TableColumn<>("Created At");
         createdCol.setCellValueFactory(new PropertyValueFactory<>("createdAt"));
+        createdCol.setCellFactory(col -> new TableCell<>() {
+            @Override
+            protected void updateItem(String item, boolean empty) {
+                super.updateItem(item, empty);
+                if (empty || item == null) {
+                    setText(null);
+                } else {
+                    try {
+                        LocalDateTime dateTime = LocalDateTime.parse(item);
+                        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd MMM yyyy, hh:mm a");
+                        setText(dateTime.format(formatter));
+                    } catch (Exception e) {
+                        setText(item);
+                    }
+                }
+            }
+        });
         createdCol.setPrefWidth(180);
 
         tableView.getColumns().addAll(idCol, nameCol, emailCol, phoneCol, createdCol);

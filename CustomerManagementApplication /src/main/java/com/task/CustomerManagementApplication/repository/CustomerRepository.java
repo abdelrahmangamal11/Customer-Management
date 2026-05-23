@@ -11,4 +11,6 @@ import com.task.CustomerManagementApplication.entities.Customer;
 @Repository
 public interface CustomerRepository extends JpaRepository<Customer, Long>{  
      Page<Customer> findAll(Specification<Customer> spec, Pageable pageable);
+     boolean existsByEmail(String email);
+     boolean existsByPhone(String phone);
 }

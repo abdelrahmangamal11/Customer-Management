@@ -73,12 +73,18 @@ public class CustomerApiService {
 
         HttpResponse<String> response = httpClient.send(request, HttpResponse.BodyHandlers.ofString());
 
-        if (response.statusCode() != 201)
-            throw new Exception("Failed to create customer: " + response.statusCode());
+        if (response.statusCode() != 201) {
+            // اقرأ الرسالة من الـ response body
+            try {
+                JsonObject error = JsonParser.parseString(response.body()).getAsJsonObject();
+                throw new Exception(error.get("message").getAsString());
+            } catch (Exception e) {
+                throw new Exception(e.getMessage());
+            }
+        }
 
         return gson.fromJson(response.body(), Customer.class);
     }
-
     //  PUT 
     public Customer updateCustomer(int id, Customer customer) throws Exception {
         String json = gson.toJson(customer);
@@ -89,8 +95,14 @@ public class CustomerApiService {
 
         HttpResponse<String> response = httpClient.send(request, HttpResponse.BodyHandlers.ofString());
 
-        if (response.statusCode() != 200)
-            throw new Exception("Failed to update customer: " + response.statusCode());
+        if (response.statusCode() != 200) {
+            try {
+                JsonObject error = JsonParser.parseString(response.body()).getAsJsonObject();
+                throw new Exception(error.get("message").getAsString());
+            } catch (Exception e) {
+                throw new Exception(e.getMessage());
+            }
+        }
 
         return gson.fromJson(response.body(), Customer.class);
     }
