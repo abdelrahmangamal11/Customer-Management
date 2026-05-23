@@ -46,14 +46,12 @@ public class CustomerFormDialog extends Dialog<Customer> {
 
         getDialogPane().setContent(grid);
 
-        // لو Edit، حط البيانات الموجودة
         if (isEdit) {
             nameField.setText(customer.getName());
             emailField.setText(customer.getEmail());
             phoneField.setText(customer.getPhone());
         }
 
-        // Validation قبل ما يحفظ
         getDialogPane().lookupButton(saveBtn).addEventFilter(
             javafx.event.ActionEvent.ACTION, event -> {
                 if (!validate()) {
@@ -62,7 +60,6 @@ public class CustomerFormDialog extends Dialog<Customer> {
             }
         );
 
-        // Convert result
         setResultConverter(button -> {
             if (button == saveBtn) {
                 Customer result = new Customer(

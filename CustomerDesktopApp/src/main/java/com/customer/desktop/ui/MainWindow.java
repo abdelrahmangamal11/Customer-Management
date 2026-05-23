@@ -61,7 +61,7 @@ public class MainWindow {
         loadCustomers();
     }
 
-    // ── Top Bar ─────────────────────────────────────────────────
+    //  Top Bar 
     private VBox buildTopBar() {
         searchName = new TextField();
         searchName.setPromptText("Search by name...");
@@ -114,7 +114,7 @@ public class MainWindow {
         return new VBox(searchBar, actionBar);
     }
 
-    // ── Table ────────────────────────────────────────────────────
+    //  Table 
     private StackPane buildTable() {
         tableView = new TableView<>();
         customerList = FXCollections.observableArrayList();
@@ -166,7 +166,7 @@ public class MainWindow {
         return new StackPane(tableView, loadingIndicator);
     }
 
-    // ── Bottom Bar ───────────────────────────────────────────────
+    //  Bottom Bar 
     private HBox buildBottomBar() {
         Button prevBtn = new Button("◀ Prev");
         prevBtn.setOnAction(e -> {
@@ -190,7 +190,7 @@ public class MainWindow {
         return bottomBar;
     }
 
-    // ── Load Customers ───────────────────────────────────────────
+    //  Load Customers 
     private void loadCustomers() {
         showLoading(true);
         new Thread(() -> {
@@ -216,7 +216,7 @@ public class MainWindow {
         }).start();
     }
 
-    // ── Open Add/Edit Form ───────────────────────────────────────
+    //  Open Add/Edit Form 
     private void openForm(Customer customer) {
         CustomerFormDialog dialog = new CustomerFormDialog(customer);
         dialog.showAndWait().ifPresent(result -> {
@@ -242,7 +242,7 @@ public class MainWindow {
         });
     }
 
-    // ── Delete ───────────────────────────────────────────────────
+    //  Delete 
     private void deleteSelected() {
         Customer selected = tableView.getSelectionModel().getSelectedItem();
         if (selected == null) {
@@ -274,7 +274,7 @@ public class MainWindow {
         });
     }
 
-    // ── Helpers ──────────────────────────────────────────────────
+    //  Helpers 
     private void showLoading(boolean visible) {
         loadingIndicator.setVisible(visible);
         tableView.setDisable(visible);
